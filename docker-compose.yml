@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  work01:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: work01
+    image: work 
+    networks: 
+      - worknet
+    volumes: 
+      - D:/Docker/Work01/src:/var/www/html/
+    ports: 
+      - 2020:80 
+
+  mysql-development:
+    image: mysql
+    container_name: mysqlDB
+    environment:
+      MYSQL_ROOT_PASSWORD: 123login
+      MYSQL_DATABASE: testapp
+    networks: 
+      - worknet
+    volumes: 
+      - mysqlDBData
+  
+networks: 
+  worknet:
+
+volumes: 
+  # src:
+  mysqlDBData:
+    external: true
+
+  
